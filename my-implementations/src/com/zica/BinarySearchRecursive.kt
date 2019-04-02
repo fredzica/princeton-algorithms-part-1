@@ -35,29 +35,4 @@ class BinarySearchRecursive {
 
         return find(elem, elems, newHi, newLow)
     }
-
-/*
-    private tailrec fun findRecursion(elem: Int, elems: IntArray, low : Int) : Int? {
-        val i = elems.size / 2
-        var realI =
-        var from = 0
-        var to = elems.lastIndex
-
-        when {
-            elem < elems[i] -> {
-                to = i - 1
-                offset =
-            }
-            elem > elems[i] -> {
-                from = i + 1
-                offset =
-            }
-            else -> return i
-        }
-
-        if (from > to)
-            return null
-
-        return findRecursion(elem, elems.copyOfRange(from, to))
-    }*/
 }

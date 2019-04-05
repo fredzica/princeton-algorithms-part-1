@@ -1,6 +1,4 @@
-package com.zica
-
-class BinarySearch {
+class BinarySearchIterative : BinarySearch {
 
     /**
      * Finds an element in a sorted array.
@@ -11,7 +9,7 @@ class BinarySearch {
      * @param elems the sorted array with the elements
      * @return the index of found element, if present
      */
-    fun find(elem: Int, elems: IntArray) : Int? {
+    override fun find(elem: Int, elems: IntArray) : Int? {
         var hi = elems.lastIndex
         var low = 0
 

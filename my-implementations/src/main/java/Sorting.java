@@ -1,5 +1,3 @@
-package com.zica;
-
 import java.util.Arrays;
 import java.util.Random;
 import java.util.function.Function;

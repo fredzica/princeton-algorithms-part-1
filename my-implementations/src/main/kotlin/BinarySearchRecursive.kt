@@ -1,6 +1,4 @@
-package com.zica
-
-class BinarySearchRecursive {
+class BinarySearchRecursive : BinarySearch {
 
     /**
      * Finds an element in a sorted array.
@@ -11,7 +9,7 @@ class BinarySearchRecursive {
      * @param elems the sorted array with the elements
      * @return the index of found element, if present
      */
-    fun find(elem: Int, elems: IntArray) : Int? {
+    override fun find(elem: Int, elems: IntArray) : Int? {
         return find(elem, elems, elems.size - 1, 0)
     }
 

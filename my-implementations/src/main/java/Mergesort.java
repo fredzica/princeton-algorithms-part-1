@@ -1,5 +1,3 @@
-package com.zica;
-
 import java.util.Arrays;
 
 public class Mergesort {

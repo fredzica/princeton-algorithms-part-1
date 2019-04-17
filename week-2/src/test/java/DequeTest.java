@@ -15,17 +15,22 @@ class DequeTest {
     @Test
     void isNotEmptyTest() {
         Deque<Integer> d = new Deque<>();
-        d.addFirst(1);
+        d.addFirst(2);
+        d.removeLast();
+        d.addLast(3);
+        d.addFirst(5);
+        d.removeLast();
         assertFalse(d.isEmpty());
     }
 
     @Test
-    void size2Test() {
+    void size3Test() {
         Deque<Integer> d = new Deque<>();
         d.addFirst(1);
         d.addLast(Integer.MAX_VALUE);
+        d.addLast(Integer.MAX_VALUE);
 
-        assertEquals(2, d.size());
+        assertEquals(3, d.size());
     }
 
     @Test
@@ -69,8 +74,10 @@ class DequeTest {
 
         Deque<Integer> d = new Deque<>();
         d.addFirst(6);
-        d.addFirst(added);
-        d.addLast(34);
+        d.addFirst(34);
+        d.addLast(added);
+        d.removeFirst();
+        d.removeFirst();
 
         assertEquals(added, d.removeFirst());
     }
@@ -81,12 +88,65 @@ class DequeTest {
 
         Deque<Integer> d = new Deque<>();
         d.addFirst(3);
+        d.removeFirst();
         d.addLast(20);
         d.addFirst(6);
         d.addLast(added);
+        d.removeFirst();
         d.addFirst(8);
 
         assertEquals(added, d.removeLast());
+    }
+
+    @Test
+    void removeLastManyTest() {
+        final int added = 4;
+
+        Deque<Integer> d = new Deque<>();
+        d.addFirst(3);
+        d.addLast(added);
+        d.addLast(20);
+        d.addLast(40);
+        d.addFirst(6);
+        d.addFirst(8);
+        d.removeLast();
+        d.removeFirst();
+        d.removeLast();
+
+        assertEquals(added, d.removeLast());
+    }
+
+    @Test
+    void removeLastUniqueTest() {
+        final int added = 4;
+
+        Deque<Integer> d = new Deque<>();
+        d.addFirst(added);
+        d.addFirst(3);
+        d.removeLast();
+        d.removeFirst();
+        d.addFirst(added);
+
+        assertEquals(added, d.removeLast());
+    }
+
+    @Test
+    void removeLastPointerLoiteringTest() {
+        final int firstAdded = 7;
+        final int added = 4;
+
+        Deque<Integer> d = new Deque<>();
+        d.addFirst(firstAdded);
+        d.addLast(added);
+
+        assertEquals(added, d.removeLast());
+
+       Integer last = null;
+       for (int elem : d) {
+           last = elem;
+       }
+
+       assertEquals(firstAdded, last);
     }
 
     @Test

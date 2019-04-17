@@ -5,3 +5,6 @@ It's necessary to import classes contained in algs4.jar
 
 ## Default package
 For the weekly assignments, the classes with the exercise code have to be in the default package. That's a requirement for the course's automated evaluation program.
+
+## Unit Tests
+All classes are tested by JUnit unit tests. They are made with JUnit 5.

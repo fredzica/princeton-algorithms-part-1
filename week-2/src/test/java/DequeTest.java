@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.NoSuchElementException;
@@ -6,15 +7,20 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class DequeTest {
 
+    private Deque<Integer> d;
+
+    @BeforeEach
+    void setup() {
+        this.d = new Deque<>();
+    }
+
     @Test
     void isEmptyTest() {
-        Deque d = new Deque();
         assertTrue(d.isEmpty());
     }
 
     @Test
     void isNotEmptyTest() {
-        Deque<Integer> d = new Deque<>();
         d.addFirst(2);
         d.removeLast();
         d.addLast(3);
@@ -25,7 +31,6 @@ class DequeTest {
 
     @Test
     void size3Test() {
-        Deque<Integer> d = new Deque<>();
         d.addFirst(1);
         d.addLast(Integer.MAX_VALUE);
         d.addLast(Integer.MAX_VALUE);
@@ -35,8 +40,6 @@ class DequeTest {
 
     @Test
     void size0Test() {
-        Deque<Integer> d = new Deque<>();
-
         assertEquals(0, d.size());
     }
 
@@ -44,7 +47,6 @@ class DequeTest {
     void addFirstTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(5);
         d.addFirst(53423);
         d.addFirst(53);
@@ -58,7 +60,6 @@ class DequeTest {
     void addLastTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addLast(5);
         d.addLast(53423);
         d.addLast(added);
@@ -72,7 +73,6 @@ class DequeTest {
     void removeFirstTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(6);
         d.addFirst(34);
         d.addLast(added);
@@ -86,7 +86,6 @@ class DequeTest {
     void removeLastTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(3);
         d.removeFirst();
         d.addLast(20);
@@ -102,7 +101,6 @@ class DequeTest {
     void removeLastManyTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(3);
         d.addLast(added);
         d.addLast(20);
@@ -120,7 +118,6 @@ class DequeTest {
     void removeLastUniqueTest() {
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(added);
         d.addFirst(3);
         d.removeLast();
@@ -135,7 +132,6 @@ class DequeTest {
         final int firstAdded = 7;
         final int added = 4;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(firstAdded);
         d.addLast(added);
 
@@ -153,7 +149,6 @@ class DequeTest {
     void removeFirstExceptionTest() {
         final int added = 3;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(added);
 
         assertEquals(added, d.removeLast());
@@ -164,7 +159,6 @@ class DequeTest {
     void removeLastExceptionTest() {
         final int added = 3;
 
-        Deque<Integer> d = new Deque<>();
         d.addFirst(added);
 
         assertEquals(added, d.removeFirst());

@@ -5,7 +5,7 @@ import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
 
-    private final String noElementErrorMsg =
+    private static final String NO_ELEMENT_ERROR_MSG =
             "There aren't any available elements. Did you check before invoking the method?";
 
     private Item[] items;
@@ -43,30 +43,29 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     // remove and return a random item
     public Item dequeue() {
         if (isEmpty())
-            throw new NoSuchElementException(noElementErrorMsg);
-
-        if (items.length == this.size/4)
-            resizeArray(items.length/2);
+            throw new NoSuchElementException(RandomizedQueue.NO_ELEMENT_ERROR_MSG);
 
         final int ix = generateRandomIndex();
         Item found = items[ix];
 
-        if (size > 1) {
-            // fill the removed position with the last item
-            items[ix] = items[lastIx];
-            // and make the previous last item empty
-            items[lastIx] = null;
-        }
+        // fill the removed position with the last item
+        items[ix] = items[lastIx];
+        // and make the previous last item empty
+        items[lastIx] = null;
 
         lastIx--;
         size--;
+
+        if (size > 0 && items.length/4 == this.size)
+            resizeArray(items.length/2);
+
         return found;
     }
 
     // return a random item (but do not remove it)
     public Item sample() {
         if (this.isEmpty())
-            throw new NoSuchElementException(noElementErrorMsg);
+            throw new NoSuchElementException(RandomizedQueue.NO_ELEMENT_ERROR_MSG);
 
         return items[generateRandomIndex()];
     }
@@ -79,7 +78,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     private void resizeArray(int newSize) {
         Item[] newArr = (Item[])new Object[newSize];
 
-        System.arraycopy(items, 0, newArr, 0, items.length);
+        System.arraycopy(items, 0, newArr, 0, size);
         items = newArr;
     }
 
@@ -96,7 +95,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
             iteratorQ.size = size;
             iteratorQ.lastIx = lastIx;
             iteratorQ.items = (Item[]) new Object[items.length];
-            System.arraycopy(items, 0, iteratorQ.items, 0, items.length);
+            System.arraycopy(items, 0, iteratorQ.items, 0, size);
         }
 
         @Override
@@ -107,7 +106,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
         @Override
         public Item next() {
             if (!this.hasNext())
-                throw new NoSuchElementException(noElementErrorMsg);
+                throw new NoSuchElementException(RandomizedQueue.NO_ELEMENT_ERROR_MSG);
 
             return iteratorQ.dequeue();
         }

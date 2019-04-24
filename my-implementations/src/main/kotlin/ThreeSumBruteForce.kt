@@ -1,18 +1,18 @@
-class ThreeSumBruteForce {
+class ThreeSumBruteForce : ThreeSum {
 
-    fun threeSum(nums: IntArray): List<List<Int>> {
-        val resultSet = mutableListOf<List<Int>>()
+    override fun threeSum(nums: IntArray): List<Triple<Int, Int, Int>> {
+        val resultSet = mutableListOf<Triple<Int, Int, Int>>()
 
-        val newNums = nums.sortedArray()
+        nums.sort()
 
-        for (i in newNums.indices) {
-            for (j in i + 1..newNums.lastIndex) {
-                for (t in j + 1..newNums.lastIndex) {
-                    val a = newNums[i]
-                    val b = newNums[j]
-                    val c = newNums[t]
+        for (i in nums.indices) {
+            for (j in i + 1..nums.lastIndex) {
+                for (t in j + 1..nums.lastIndex) {
+                    val a = nums[i]
+                    val b = nums[j]
+                    val c = nums[t]
                     if (a + b + c == 0)
-                        resultSet.add(listOf(a, b, c))
+                        resultSet.add(Triple(a, b, c))
                 }
             }
         }

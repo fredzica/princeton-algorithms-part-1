@@ -19,6 +19,7 @@ class MergesortRecursive : Sort {
         var firstPartIx = lo
         var secondPartIx = mid + 1
 
+        // check if its already sorted
         if (arr[mid] < arr[secondPartIx])
             return
 

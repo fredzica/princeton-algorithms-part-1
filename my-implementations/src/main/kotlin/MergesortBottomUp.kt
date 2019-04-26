@@ -1,18 +1,13 @@
-class MergesortRecursive : Sort {
+class MergesortBottomUp : Sort {
     override fun <T : Comparable<T>> sort(arr: Array<T>) {
         val aux = arr.copyOf()
-        sort(arr, aux, 0, arr.lastIndex)
-    }
+        var sz = 1
+        while (sz < arr.size) {
+            for (i in 0..arr.lastIndex - sz step sz * 2)
+                merge(arr, aux, i, i + sz - 1, Math.min(i + sz * 2 - 1, arr.size - 1))
 
-    private fun <T: Comparable<T>> sort(arr: Array<T>, aux: Array<T>, lo: Int, hi: Int) {
-        if (lo >= hi)
-            return
-
-        val mid = lo + (hi - lo)/2
-
-        sort(arr, aux, lo, mid)
-        sort(arr, aux, mid + 1, hi)
-        merge(arr, aux, lo, mid, hi)
+            sz *= 2
+        }
     }
 
     private fun <T: Comparable<T>> merge(arr: Array<T>, aux: Array<T>, lo: Int, mid: Int, hi: Int) {

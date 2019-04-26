@@ -8,7 +8,8 @@ internal class SortTest {
     companion object {
         @JvmStatic
         fun implementations() : Array<Sort> {
-            return arrayOf(SelectionSort(), InsertionSort(), ShellSort(), MergesortRecursive())
+            return arrayOf(SelectionSort(), InsertionSort(), ShellSort(),
+                MergesortRecursive(), MergesortBottomUp())
         }
 
         const val implementationsMethodName = "implementations"

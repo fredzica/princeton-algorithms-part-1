@@ -1,6 +1,6 @@
 class InsertionSort : Sort {
     override fun <T : Comparable<T>> sort(arr: Array<T>) {
-        if (arr.size < 1)
+        if (arr.size <= 1)
             return
 
         for (i in 1..arr.lastIndex) {

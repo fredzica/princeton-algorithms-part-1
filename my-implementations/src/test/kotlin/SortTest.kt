@@ -8,7 +8,7 @@ internal class SortTest {
     companion object {
         @JvmStatic
         fun implementations() : Array<Sort> {
-            return arrayOf(SelectionSort(), InsertionSort())
+            return arrayOf(SelectionSort(), InsertionSort(), ShellSort(), MergesortRecursive())
         }
 
         const val implementationsMethodName = "implementations"
@@ -21,6 +21,24 @@ internal class SortTest {
         s.sort(arr)
 
         Assertions.assertArrayEquals(arrayOf(1, 3, 4, 7, 9, 15), arr)
+    }
+
+    @ParameterizedTest
+    @MethodSource(implementationsMethodName)
+    fun testSortIntTwoElements(s: Sort) {
+        val arr = arrayOf(7, 2)
+        s.sort(arr)
+
+        Assertions.assertArrayEquals(arrayOf(2, 7), arr)
+    }
+
+    @ParameterizedTest
+    @MethodSource(implementationsMethodName)
+    fun testSortIntThreeElements(s: Sort) {
+        val arr = arrayOf(7, 2, 5)
+        s.sort(arr)
+
+        Assertions.assertArrayEquals(arrayOf(2, 5, 7), arr)
     }
 
     @ParameterizedTest

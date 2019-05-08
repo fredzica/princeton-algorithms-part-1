@@ -21,8 +21,8 @@ build:
     key: "$CI_COMMIT_REF_NAME"
     policy: push
     paths:
-      - build
-      - .gradle
+      - my-implementations/build
+      - my-implementations/.gradle
 
 test:
   stage: test
@@ -31,5 +31,5 @@ test:
     key: "$CI_COMMIT_REF_NAME"
     policy: pull
     paths:
-      - build
-      - .gradle
+      - my-implementations/build
+      - my-implementations/.gradle

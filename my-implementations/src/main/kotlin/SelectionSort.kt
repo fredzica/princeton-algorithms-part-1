@@ -11,9 +11,7 @@ class SelectionSort : Sort {
                     smaller = j
                 }
             }
-            val aux = arr[i]
-            arr[i] = arr[smaller]
-            arr[smaller] = aux
+            exchange(arr, i, smaller)
         }
     }
 }

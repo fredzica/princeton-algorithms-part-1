@@ -15,9 +15,7 @@ class ShellSort : Sort {
                     if (arr[j] >= arr[j - h])
                         break
 
-                    val aux = arr[j]
-                    arr[j] = arr[j - h]
-                    arr[j - h] = aux
+                    exchange(arr, j, j - h)
                 }
             }
             h /= 3

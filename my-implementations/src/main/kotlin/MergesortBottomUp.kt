@@ -1,5 +1,5 @@
-class MergesortBottomUp : Sort {
-    override fun <T : Comparable<T>> sort(arr: Array<T>) {
+class MergesortBottomUp: Sort {
+    override fun <T: Comparable<T>> sort(arr: Array<T>) {
         val aux = arr.copyOf()
         var sz = 1
         while (sz < arr.size) {

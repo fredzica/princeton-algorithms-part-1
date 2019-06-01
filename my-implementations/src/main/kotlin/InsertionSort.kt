@@ -8,9 +8,7 @@ class InsertionSort : Sort {
                 if (arr[j].compareTo(arr[j - 1]) >= 0)
                     break
 
-                val aux = arr[j]
-                arr[j] = arr[j - 1]
-                arr[j - 1] = aux
+                exchange(arr, j, j - 1)
             }
 
         }

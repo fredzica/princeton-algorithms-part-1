@@ -9,7 +9,7 @@ internal class SortTest {
         @JvmStatic
         fun implementations() : Array<Sort> {
             return arrayOf(SelectionSort(), InsertionSort(), ShellSort(),
-                MergesortRecursive(), MergesortBottomUp())
+                MergesortRecursive(), MergesortBottomUp(), Quicksort())
         }
 
         const val implementationsMethodName = "implementations"
@@ -44,6 +44,15 @@ internal class SortTest {
 
     @ParameterizedTest
     @MethodSource(implementationsMethodName)
+    fun testSortDuplicateElements(s: Sort) {
+        val arr = arrayOf(3, 2, 9, 4, 1, 5, 8, 1, 1, 5, 5)
+        s.sort(arr)
+
+        Assertions.assertArrayEquals(arrayOf(1, 1, 1, 2, 3, 4, 5, 5, 5, 8, 9), arr)
+    }
+
+    @ParameterizedTest
+    @MethodSource(implementationsMethodName)
     fun testSortBigArray(s: Sort) {
         val ixToBeTested1 = 834
         val ixToBeTested2 = 49857
@@ -51,6 +60,8 @@ internal class SortTest {
         arr[ixToBeTested1] = ixToBeTested2
         arr[ixToBeTested2] = ixToBeTested1
 
+        val shuffler = KnuthShuffle()
+        shuffler.shuffle(arr)
         s.sort(arr)
         Assertions.assertEquals(arr[ixToBeTested1], ixToBeTested1)
         Assertions.assertEquals(arr[ixToBeTested2], ixToBeTested2)

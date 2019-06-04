@@ -1,5 +1,6 @@
 
-import org.junit.jupiter.api.Assertions
+import org.junit.jupiter.api.Assertions.assertArrayEquals
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.MethodSource
 
@@ -9,7 +10,7 @@ internal class SortTest {
         @JvmStatic
         fun implementations() : Array<Sort> {
             return arrayOf(SelectionSort(), InsertionSort(), ShellSort(),
-                MergesortRecursive(), MergesortBottomUp(), Quicksort())
+                MergesortRecursive(), MergesortBottomUp(), Quicksort(), QuicksortLessCalls())
         }
 
         const val implementationsMethodName = "implementations"
@@ -21,7 +22,7 @@ internal class SortTest {
         val arr = arrayOf(7, 9, 1, 3, 4, 15)
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf(1, 3, 4, 7, 9, 15), arr)
+        assertArrayEquals(arrayOf(1, 3, 4, 7, 9, 15), arr)
     }
 
     @ParameterizedTest
@@ -30,7 +31,7 @@ internal class SortTest {
         val arr = arrayOf(7, 2)
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf(2, 7), arr)
+        assertArrayEquals(arrayOf(2, 7), arr)
     }
 
     @ParameterizedTest
@@ -39,7 +40,7 @@ internal class SortTest {
         val arr = arrayOf(7, 2, 5)
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf(2, 5, 7), arr)
+        assertArrayEquals(arrayOf(2, 5, 7), arr)
     }
 
     @ParameterizedTest
@@ -48,7 +49,20 @@ internal class SortTest {
         val arr = arrayOf(3, 2, 9, 4, 1, 5, 8, 1, 1, 5, 5)
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf(1, 1, 1, 2, 3, 4, 5, 5, 5, 8, 9), arr)
+        assertArrayEquals(arrayOf(1, 1, 1, 2, 3, 4, 5, 5, 5, 8, 9), arr)
+    }
+
+    @ParameterizedTest
+    @MethodSource(implementationsMethodName)
+    fun testSortBigArrayDuplicateElements(s: Sort) {
+        val size = 5000
+        val arr = Array(size) {1}
+        s.sort(arr)
+
+        assertEquals(arr[0], 1)
+        assertEquals(arr[4850], 1)
+        assertEquals(arr[4999], 1)
+        assertEquals(size, arr.size)
     }
 
     @ParameterizedTest
@@ -63,8 +77,8 @@ internal class SortTest {
         val shuffler = KnuthShuffle()
         shuffler.shuffle(arr)
         s.sort(arr)
-        Assertions.assertEquals(arr[ixToBeTested1], ixToBeTested1)
-        Assertions.assertEquals(arr[ixToBeTested2], ixToBeTested2)
+        assertEquals(arr[ixToBeTested1], ixToBeTested1)
+        assertEquals(arr[ixToBeTested2], ixToBeTested2)
     }
 
     @ParameterizedTest
@@ -73,17 +87,17 @@ internal class SortTest {
         val arr = arrayOf('7', 'b', 'y', 'o', '1', 'a', 'e', 'h')
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf('1', '7', 'a', 'b', 'e', 'h', 'o', 'y'), arr)
+        assertArrayEquals(arrayOf('1', '7', 'a', 'b', 'e', 'h', 'o', 'y'), arr)
     }
 
     @ParameterizedTest
     @MethodSource(implementationsMethodName)
     fun testSortAlreadySorted(s: Sort) {
-        val size = 10000
+        val size = 50000
         val arr = Array(size) {i -> i}
         s.sort(arr)
 
-        Assertions.assertArrayEquals(Array(size) {i -> i}, arr)
+        assertArrayEquals(Array(size) {i -> i}, arr)
     }
 
     @ParameterizedTest
@@ -92,7 +106,7 @@ internal class SortTest {
         val arr = arrayOf(7)
         s.sort(arr)
 
-        Assertions.assertArrayEquals(arrayOf(7), arr)
+        assertArrayEquals(arrayOf(7), arr)
     }
 
     @ParameterizedTest
@@ -101,6 +115,6 @@ internal class SortTest {
         val arr = emptyArray<String>()
         s.sort(arr)
 
-        Assertions.assertArrayEquals(emptyArray(), arr)
+        assertArrayEquals(emptyArray(), arr)
     }
 }

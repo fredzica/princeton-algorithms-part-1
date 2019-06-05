@@ -10,7 +10,8 @@ internal class SortTest {
         @JvmStatic
         fun implementations() : Array<Sort> {
             return arrayOf(SelectionSort(), InsertionSort(), ShellSort(),
-                MergesortRecursive(), MergesortBottomUp(), Quicksort(), QuicksortLessCalls())
+                MergesortRecursive(), MergesortBottomUp(), Quicksort(), QuicksortLessCalls(),
+                QuicksortThreeWay())
         }
 
         const val implementationsMethodName = "implementations"
